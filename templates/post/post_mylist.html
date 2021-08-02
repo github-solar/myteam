@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<!-- Gallery -->
+<div class="row">
+  <div class="col-md-12">
+      <div class="row">
+          {% for object in object_list %}
+          {% if object.author == request.user %}
+          <figure class="col-md-4">
+              <img src="{{object.image.url}}" class="w-100 shadow-1-strong rounded mb-4" alt="">
+          </figure>
+          {% endif %}
+          {% endfor %}
+      </div>
+  </div>
+
+</div>
+<!-- Gallery -->
+
+{% endblock %}

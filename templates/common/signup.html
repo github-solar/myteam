@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'post/css/bootstrap.css' %}">
+<!--  static 하위의 파일을 불러올 때의 경로명 설정을 잘봐라.-->
+    <title>회원가입 : Team_stagram</title>
+</head>
+
+<body>
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col-4">
+            <a href="{% url 'post:index' %}">
+                <img src="{% static 'post/images/home_black_24dp.png' %}"
+                     alt="홈버튼"></a>
+        </div>
+        <div class="col-8 text-right">
+            <span>이미 회원이세요?&nbsp;&nbsp; <a href="{% url 'common:login' %}">
+                <button type="button" class="btn btn-secondary">로그인</button></a></span>
+        </div>
+    </div>
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <label for="username">사용자이름</label>
+            <input type="text" class="form-control" name="username" id="username"
+                    value="{{ form.username.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password1">비밀번호</label>
+            <input type="password" class="form-control" name="password1" id="password1"
+                    value="{{ form.password1.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password2">비밀번호 확인</label>
+            <input type="password" class="form-control" name="password2" id="password2"
+                    value="{{ form.password2.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="text" class="form-control" name="email" id="email"
+                    value="{{ form.email.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">등 록</button>
+    </form>
+</div>
+</body>
+</html>

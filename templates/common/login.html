@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'post/css/bootstrap.css' %}">
+<!--  static 하위의 파일을 불러올 때의 경로명 설정을 잘봐라.-->
+    <title>로그인 : Team_stagram</title>
+</head>
+
+<body>
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col-4" >
+            <a href="{% url 'post:index' %}">
+                <img src="{% static 'post/images/home_black_24dp.png' %}"
+                     alt="홈버튼"></a>
+        </div>
+
+        <div class="col-8 text-right">
+            <span>아직 회원이 아니세요?&nbsp;&nbsp; <a href="{% url 'common:signup' %}">
+                <button type="button" class="btn btn-secondary">가입하기</button></a></span>
+        </div>
+    </div>
+
+    <form method="post" class="post-form" action="{% url 'common:login' %}">
+        {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% include 'form_errors.html' %}
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" class="form-control" name="username" id="username"
+                 value="{{ form.username.value|default_if_none:''}}">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" name="password" id="password"
+                 value="{{ form.password.value|default_if_none:''}}">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+
+    <!--        <form action="" method="post">-->
+    <!--            {% csrf_token %}-->
+    <!--            {{form.as_p}}-->
+    <!--            <input type="submit" value="login" class = 'btn btn-outline-primary'>-->
+    <!--        </form>-->
+
+</div>
+<script src="{% static 'post/js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'post/js/bootstrap.js' %}"></script>
+</body>
+</html>
